@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
+    <ion-title class="text-center uppercase font-black">
+      Recent Purchases
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <p class="uppercase text-center">Pull to refresh</p>
+  <ion-grid class="ion-text-center">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-row class="header-row">
+      <ion-col>
+        <ion-text>Date</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Meter</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Amount</ion-text>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngFor="let transaction of transactions">
+      <ion-col>
+        <ion-text>
+            {{transaction.transaction_date | date}}
+        </ion-text>
+      </ion-col>
+
+        <ion-col>
+          <ion-text>
+            {{transaction.meter_number}}
+          </ion-text>
+        </ion-col>
+  
+        <ion-col>
+          <ion-text>
+            KES {{transaction.amount}}
+          </ion-text>
+        </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

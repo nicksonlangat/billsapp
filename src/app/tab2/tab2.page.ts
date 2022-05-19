@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  transactions: any = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  getTransactions(){
+    return this.http.get(`http://13.58.160.156/transaction/${localStorage.getItem('device_id')}/user`).subscribe(res=>{
+      this.transactions = res['data']['0'];
+      console.log(this.transactions)
+    })
+  }
 
+  ngOnInit(){
+    this.getTransactions();
+  }
 }

@@ -1,17 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
+    <ion-title class="text-center uppercase font-black">
+      Purchase Power Tokens
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content>
+  <div class="py-6 px-6 lg:px-8">
+    <div class="flex items-center">
+      <input (click)="loadLast()" id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-cyan-600 bg-gray-100 rounded border-gray-300 focus:ring-cyan-500 ">
+      <label for="link-checkbox" class="ml-2 text-sm font-medium text-gray-900">Use last Phone/Meter Numbers?</label>
+  </div>
+  <br>
+    <form class="space-y-6" [formGroup]="form"  (ngSubmit)="submitForm()">
+        <div *ngIf="!autocomplete">
+            <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone Number</label>
+            <input type="text" 
+            formControlName="phone_number"
+            class="bg-gray-50 border border-black-900 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 " placeholder="e.g 0713xxxxx" required>
+        </div>
+        <div *ngIf="autocomplete">
+          <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone Number</label>
+          <input type="text" 
+          formControlName="phone_number"
+          class="bg-gray-50 border border-black-900 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 "  required>
+      </div>
+        <div *ngIf="!autocomplete">
+          <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Meter Number</label>
+          <input type="text" 
+          formControlName="meter_number"
+          class="bg-gray-50 border border-black-900 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" placeholder="11 digit account number" required>
+      </div>
+      <div *ngIf="autocomplete">
+        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Meter Number</label>
+        <input type="text" 
+        formControlName="meter_number"
+        class="bg-gray-50 border border-black-900 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"  required>
+    </div>
+      <div>
+        <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Amount</label>
+        <input type="text"
+        formControlName="amount"
+        class="bg-gray-50 border border-black-900 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" placeholder="KES to deduct" required>
+    </div>
+        <button type="submit" class="w-full text-white bg-cyan-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Continue</button>
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+            New Phone/Meter Numbers? <a [routerLink]="['/tabs/tab3']" class="text-cyan-700 hover:underline dark:text-blue-500">Add to account</a>
+        </div>
+    </form>
+</div>
 </ion-content>
