@@ -27,6 +27,7 @@ export class Tab3Page {
         error: (error) => console.log(error),
       });
       this.form.reset();
+      this.form.get('device_id').setValue(localStorage.getItem('device_id'));
   }
 
   getDetails(){

@@ -9,15 +9,23 @@ import { Component } from '@angular/core';
 export class Tab2Page {
   transactions: any = [];
   constructor(private http: HttpClient) {}
+  getTransactions(event) {
+    return this.http
+      .get<any>(`http://13.58.160.156/transaction/${localStorage.getItem('device_id')}/user`)
+      .subscribe(response => {
+        this.transactions = response['data']['0'];
+        console.log(this.transactions);
 
-  getTransactions(){
-    return this.http.get(`http://13.58.160.156/transaction/${localStorage.getItem('device_id')}/user`).subscribe(res=>{
-      this.transactions = res['data']['0'];
-      console.log(this.transactions)
-    })
+        if (event)
+          event.target.complete();
+      }, error => {
+        console.log(error);
+
+        if (event)
+          event.target.complete();
+      })
   }
-
   ngOnInit(){
-    this.getTransactions();
+    this.getTransactions(null);
   }
 }
